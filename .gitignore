@@ -1,3 +1,4 @@
 /identity-service/node_modules
 /api-gateway/node_modules
-/identity-service/evn
+.env
+identity-service/.env
