@@ -5,7 +5,7 @@ import { generateTokens } from "../utils/generateToken.js";
 
 // user registraion
 
-export async function regsiterUser(req, res) {
+export async function registerUser(req, res) {
     logger.info("Registration endpoint hit")
     try {
 
