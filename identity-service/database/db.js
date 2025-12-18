@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import logger from "../src/utils/logge.js";
+import logger from "../src/utils/logger.js";
 
 const uri = process.env.MONGODB_URI
 

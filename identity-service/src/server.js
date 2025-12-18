@@ -1,5 +1,4 @@
-import dotenv from "dotevn"
-dotenv.config()
+import "dotenv/config"
 
 import express from "express"
 import { connectToDB } from "../database/db.js"
@@ -10,10 +9,27 @@ import { RateLimiterRedis } from "rate-limiter-flexible"
 import Redis from "ioredis"
 import rateLimit from "express-rate-limit"
 import RedisStore from "rate-limit-redis"
+import router from "./routes/identity-service.js"
+import errorHandler from "./middleware/errorHandler.js"
+
+connectToDB()
 
 const app = express()
+const PORT = process.env.PORT || 3001
 
-const redisClient = new Redis(process.env.REDIS_URL)
+const redisClient = new Redis({
+    host: process.env.REDIS_HOST || "127.0.0.1",
+    port: process.env.REDIS_PORT || "6379"
+})
+
+redisClient.on("connect", () => {
+    console.log("Redis connected");
+})
+
+redisClient.on("error", (error) => {
+    console.log("Redis error", error);
+
+})
 
 app.use(express.json())
 app.use(helmet())
@@ -59,6 +75,26 @@ const sensitiveEndpointLimit = rateLimit({
         })
     },
     store: new RedisStore({
-        sendCommand: (...args) => { }
+        sendCommand: (...args) => redisClient.call(...args)
     })
+})
+
+// apply this sensitiveEndpointLimiter to our routes
+app.use("/api/auth/register", sensitiveEndpointLimit)
+
+// routes
+app.use("/api/auth", router)
+
+// error handler
+app.use(errorHandler)
+
+
+app.listen(PORT, () => {
+    logger.info(`Identity service running on ${PORT}`)
+})
+
+// unhandled promise rejection
+
+process.on("unhandledRejection", (reason, promise) => {
+    logger.error("Unhandled rejection at", promise, "reason", reason)
 })
