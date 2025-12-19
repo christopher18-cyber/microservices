@@ -31,7 +31,9 @@ redisClient.on("error", (error) => {
 
 })
 
+
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(helmet())
 app.use(configureCors())
 

@@ -30,7 +30,7 @@ export async function registerUser(req, res) {
             } else {
                 user = new User({ email, password, username })
                 await user.save()
-                logger.warn("User saved successfully.", user._id)
+                logger.info("User saved successfully.", user._id)
 
                 const { accessToken, refreshToken } = await generateTokens(user)
 
