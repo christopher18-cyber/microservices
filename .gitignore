@@ -1,5 +1,8 @@
 /identity-service/node_modules
 /api-gateway/node_modules
+/media-service/node_modules
+/post-service/node_modules
+/search-service/node_modules
 .env
 identity-service/.env
 /identity-service/combined.log
