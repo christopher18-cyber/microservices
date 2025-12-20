@@ -2,5 +2,7 @@
 /api-gateway/node_modules
 .env
 identity-service/.env
-identity-service/combined.log
-identity-service/error.log
+/identity-service/combined.log
+/identity-service/error.log
+combined.log
+error.log
