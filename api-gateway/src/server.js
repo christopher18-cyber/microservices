@@ -6,6 +6,9 @@ import helmet from "helmet"
 import rateLimit from "express-rate-limit"
 import RedisStore from "rate-limit-redis"
 import logger from "./utils/logger.js"
+import proxy from "express-http-proxy"
+import errorHandler from "./middleware/errorhandler.js"
+
 const app = express()
 
 const PORT = process.env.PORT || 3000
@@ -45,4 +48,48 @@ const ratelimit = rateLimit({
     })
 })
 
-app.use(rateLimit())
+app.use(ratelimit)
+app.use((req, res, next) => {
+    logger.info(`Received ${req.method} request to ${req.url}`)
+    logger.info(`Request body, ${req.body}`)
+    next()
+})
+
+const proxyOption = {
+    proxyReqPathResolver: (req) => {
+        return req.originalUrl.replace(/^\/v1/, "/api")
+    },
+    proxyErrorHandler: (err, res, next) => {
+        logger.error(`Proxy error: ${err.message}`)
+        res.status(500).json({
+            message: `Internal server error`, error: err.message,
+            success: false
+        })
+    }
+}
+
+// setting up proxy for identity service
+
+app.use("/v1/auth", proxy(process.env.IDENTITY_SERVICE_URL, {
+    ...proxyOption,
+    proxyReqBodyDecorator: (bodyContent, srcReq) => {
+        return bodyContent
+    },
+    proxyReqOptDecorator: (proxyReqOpts) => {
+        proxyReqOpts.headers = proxyReqOpts.headers || {}
+        proxyReqOpts.headers["Content-Type"] = "application/json"
+        return proxyReqOpts
+    },
+    userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
+        logger.info(`Response received from identity service: ${proxyRes.statusCode}`)
+        return proxyResData
+    }
+}))
+
+app.use(errorHandler)
+
+app.listen(PORT, () => {
+    logger.info(`API gateway is now running on port ${PORT}`);
+    logger.info(`Identity service is running on port ${process.env.IDENTITY_SERVICE_URL}`)
+    logger.info(`Redis Url: redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`)
+})
