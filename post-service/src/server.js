@@ -1,0 +1,61 @@
+import "dotenv/config"
+
+import express from "express"
+import mongoose from "mongoose"
+import Redis from "ioredis"
+import cors from "cors"
+import helmet from "helmet"
+import postRoutes from "./routes/post-routes.js"
+import errorHandler from "./middleware/errorHandler.js"
+import logger from "./utils/logger.js"
+import { connectToDB } from "../database/db.js"
+
+connectToDB()
+
+const app = express()
+const PORT = process.env.PORT || 3002
+
+const redisClient = new Redis({
+    host: process.env.REDIS_HOST || "127.0.0.1",
+    port: process.env.REDIS_PORT || "6379"
+})
+
+redisClient.on("connect", () => {
+    console.log("Redis connected");
+})
+
+redisClient.on("error", (error) => {
+    console.log("Redis error", error);
+})
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(helmet())
+app.use(configureCors())
+
+app.use((req, res, next) => {
+    logger.info(`Received ${req.method} request to ${req.url}`)
+    logger.info(`Request body, ${req.body}`)
+    next()
+})
+
+// ip based rate limiting for sensitive endpoints
+
+// const sensitiveEndpointLimit = rateLimit({
+//     windowMs: 15 * 60 * 1000,
+//     max: 50,
+//     standardHeaders: true,
+//     legacyHeaders: false,
+//     handler: (req, res) => {
+//         logger.warn(`Sensitive endpoint rate limit exceeded for IP: ${req.ip}`)
+//         res.status(429).json({
+//             success: false,
+//             message: "Too many requests."
+//         })
+//     },
+//     store: new RedisStore({
+//         sendCommand: (...args) => redisClient.call(...args)
+//     })
+// })
+
+
