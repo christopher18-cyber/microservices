@@ -302,3 +302,10 @@
 {"level":"info","message":"Received POST request to /api/auth/login","service":"identity-service","timestamp":"2025-12-24T08:26:21.988Z"}
 {"level":"info","message":"Request body, [object Object]","service":"identity-service","timestamp":"2025-12-24T08:26:21.990Z"}
 {"level":"info","message":"Login endpoint hit.....","service":"identity-service","timestamp":"2025-12-24T08:26:21.996Z"}
+{"level":"info","message":"Received POST request to /api/auth/login","service":"identity-service","timestamp":"2025-12-24T10:55:26.150Z"}
+{"level":"info","message":"Request body, [object Object]","service":"identity-service","timestamp":"2025-12-24T10:55:26.181Z"}
+{"level":"info","message":"Login endpoint hit.....","service":"identity-service","timestamp":"2025-12-24T10:55:26.207Z"}
+{"level":"info","message":"Received POST request to /api/auth/login","service":"identity-service","timestamp":"2025-12-24T12:46:44.812Z"}
+{"level":"info","message":"Request body, [object Object]","service":"identity-service","timestamp":"2025-12-24T12:46:44.849Z"}
+{"level":"info","message":"Login endpoint hit.....","service":"identity-service","timestamp":"2025-12-24T12:46:44.884Z"}
+{"level":"info","message":"Identity service running on 3001","service":"identity-service","timestamp":"2025-12-24T13:24:29.461Z"}

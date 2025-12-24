@@ -2,6 +2,16 @@ import logger from "../utils/logger.js";
 import Post from "../models/Post.js";
 import { validateCreatePost } from "../utils/validation.js";
 
+export async function invalidatePostCaches(req, input) {
+
+    const cachedKey = `post:${input}`
+    await req.redisClient.del(cachedKey)
+    const keys = await req.redisClient.keys("posts:*")
+    if (keys.length > 0) {
+        await req.redisClient.del(keys)
+    }
+}
+
 export async function createPost(req, res) {
     logger.info("Create post endpoint hit.")
     try {
@@ -21,6 +31,7 @@ export async function createPost(req, res) {
         })
 
         await newlyCreatedPost.save()
+        await invalidatePostCaches(req, newlyCreatedPost._id.toString())
         logger.info("Post created successfully.", newlyCreatedPost)
         res.status(201).json({
             success: true,
@@ -78,7 +89,27 @@ export async function getAllPosts(req, res) {
 }
 
 export async function getPost(req, res) {
-    try { }
+    try {
+        const postId = req.params.id
+        const cacheKey = `post:${postId}`
+
+        const cachedPost = await req.redisClient.get(cacheKey)
+
+        if (cachedPost) {
+            return res.json(JSON.parse(cachedPost))
+        } else {
+            const singlePostDetailsbyId = await Post.findById(postId)
+            if (!singlePostDetailsbyId) {
+                return res.status(404).json({
+                    message: "Post not found",
+                    success: false
+                })
+            } else {
+                await req.redisClient.setex(cachedPost, 3600, JSON.stringify(singlePostDetailsbyId))
+                res.json(singlePostDetailsbyId)
+            }
+        }
+    }
     catch (err) {
         logger.error("Error fetching post.", err)
         res.status(500).json({
@@ -89,7 +120,26 @@ export async function getPost(req, res) {
 }
 
 export async function deletePost(req, res) {
-    try { }
+    try {
+
+        const post = await Post.findOneAndDelete({
+            _id: req.params.id,
+            user: req.user.userId
+        })
+
+        if (!post) {
+            return res.status(404).json({
+                message: `Post not found.`,
+                success: false
+            })
+        } else {
+            await invalidatePostCaches(req, req.params.id)
+            res.json({
+                message: "post deleted successfully",
+                success: true
+            })
+        }
+    }
     catch (err) {
         logger.error("Error deleting post.", err)
         res.status(500).json({

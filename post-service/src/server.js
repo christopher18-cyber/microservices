@@ -70,7 +70,7 @@ app.use("/api/posts", (req, res, next) => {
 app.use(errorHandler)
 
 app.listen(PORT, () => {
-    logger.info(`Identity service running on port ${PORT}`)
+    logger.info(`Post service running on port ${PORT}`)
 })
 
 process.on("unhandledRejection", (reason, promise) => {
