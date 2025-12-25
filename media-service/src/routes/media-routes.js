@@ -16,7 +16,7 @@ const upload = multer({
     }
 }).single("file")
 
-router.post("/upload", authenticateRequest, (Req, res, next) => {
+router.post("/upload", authenticateRequest, (req, res, next) => {
     upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {
             logger.error("Multer error while uploading.", err)

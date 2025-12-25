@@ -6,6 +6,7 @@ import logger from "../utils/logger.js";
 export async function uploadMedia(req, res) {
     logger.info("starting media upload.")
     try {
+        console.log(req.file, "file req")
         if (!req.file) {
             logger.error("No file found, please add a file and try again.")
             return res.status(400).json({
@@ -13,7 +14,9 @@ export async function uploadMedia(req, res) {
                 message: "No file found, please add a file and try again."
             })
         } else {
-            const { originalName, mimeType, buffer } = req.file
+            const { originalname, mimetype, buffer } = req.file
+            const originalName = originalname
+            const mimeType = mimetype
             const userId = req.user.userId
 
             logger.info(`File details: name=${originalName}, type=${mimeType}`)
@@ -25,7 +28,7 @@ export async function uploadMedia(req, res) {
             const newlyCreatedMedia = new Media({
                 publicId: cloudinaryUploadResult.public_id,
                 originalName,
-                mimeType,
+                mimeType: mimeType,
                 url: cloudinaryUploadResult.secure_url,
                 userId
             })
@@ -41,9 +44,9 @@ export async function uploadMedia(req, res) {
         }
     }
     catch (err) {
-        logger.error(`Error while uploading`, error)
+        logger.error(`Error creating media.`, err)
         res.status(500).json({
-            message: "Error while uploading",
+            message: "Error creating media.",
             success: false
         })
     }
