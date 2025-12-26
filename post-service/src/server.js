@@ -11,6 +11,7 @@ import { configureCors } from "../config/corsConfig.js"
 import { RateLimiterRedis } from "rate-limiter-flexible"
 import rateLimit from "express-rate-limit"
 import RedisStore from "rate-limit-redis"
+import { connectRabbitMQ } from "./utils/rabbitmq.js"
 
 connectToDB()
 
@@ -69,9 +70,22 @@ app.use("/api/posts", (req, res, next) => {
 
 app.use(errorHandler)
 
-app.listen(PORT, () => {
-    logger.info(`Post service running on port ${PORT}`)
-})
+async function startServer() {
+    try {
+        await connectRabbitMQ()
+        app.listen(PORT, () => {
+            logger.info(`Post service running on port ${PORT}`)
+        })
+    }
+    catch (err) {
+        logger.error("Failed to connect to server.", err)
+        process.exit(1)
+    }
+}
+
+startServer()
+
+
 
 process.on("unhandledRejection", (reason, promise) => {
     logger.error("Unhandled Rejection at", promise, "reason", reason)

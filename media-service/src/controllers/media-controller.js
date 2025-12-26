@@ -51,3 +51,22 @@ export async function uploadMedia(req, res) {
         })
     }
 }
+
+
+export async function getAllMedias(req, res) {
+
+    req.on("aborted", () => {
+        logger.warn("Client aborted request, stop processing");
+    });
+    try {
+        const results = await Media.find({}).maxTimeMS(5000).exec()
+        res.json({ results })
+    }
+    catch (err) {
+        logger.error(`Error fetching medias.`, err)
+        res.status(500).json({
+            message: "Error fetching media.",
+            success: false
+        })
+    }
+}

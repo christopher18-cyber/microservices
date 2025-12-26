@@ -1,6 +1,7 @@
 import logger from "../utils/logger.js";
 import Post from "../models/Post.js";
 import { validateCreatePost } from "../utils/validation.js";
+import { publishEvent } from "../utils/rabbitmq.js";
 
 export async function invalidatePostCaches(req, input) {
 
@@ -133,6 +134,12 @@ export async function deletePost(req, res) {
                 success: false
             })
         } else {
+
+            await publishEvent("post-deleted", {
+                postId: post._id.toString(),
+                userId: req.user.userId,
+                mediaIds: post.mediaIds
+            })
             await invalidatePostCaches(req, req.params.id)
             res.json({
                 message: "post deleted successfully",

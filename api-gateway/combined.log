@@ -334,3 +334,51 @@
 {"level":"info","message":"Received POST request to /v1/posts/create-post","service":"api-gateway","timestamp":"2025-12-25T08:45:59.020Z"}
 {"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T08:45:59.020Z"}
 {"level":"info","message":"Response received from post service: 201","service":"api-gateway","timestamp":"2025-12-25T08:45:59.327Z"}
+{"level":"info","message":"Received POST request to /v1/auth/login","service":"api-gateway","timestamp":"2025-12-25T10:39:21.624Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T10:39:21.635Z"}
+{"level":"info","message":"Response received from identity service: 200","service":"api-gateway","timestamp":"2025-12-25T10:39:25.358Z"}
+{"level":"info","message":"Received GET request to /v1/media/get","service":"api-gateway","timestamp":"2025-12-25T10:41:12.380Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T10:41:12.380Z"}
+{"level":"error","message":"Proxy error: socket hang up","service":"api-gateway","timestamp":"2025-12-25T10:43:06.932Z"}
+{"level":"info","message":"Received GET request to /v1/media/get","service":"api-gateway","timestamp":"2025-12-25T10:43:08.567Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T10:43:08.569Z"}
+{"level":"error","message":"Proxy error: socket hang up","service":"api-gateway","timestamp":"2025-12-25T10:43:30.162Z"}
+{"level":"info","message":"Received GET request to /v1/media/get","service":"api-gateway","timestamp":"2025-12-25T10:47:36.250Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T10:47:36.251Z"}
+{"level":"info","message":"Response received from media service: 408","service":"api-gateway","timestamp":"2025-12-25T10:53:00.895Z"}
+{"level":"info","message":"Received GET request to /v1/media/get","service":"api-gateway","timestamp":"2025-12-25T10:54:05.741Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T10:54:05.742Z"}
+{"level":"info","message":"Response received from media service: 408","service":"api-gateway","timestamp":"2025-12-25T10:59:30.990Z"}
+{"level":"info","message":"Received GET request to /v1/media/get","service":"api-gateway","timestamp":"2025-12-25T11:38:00.527Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T11:38:00.532Z"}
+{"level":"info","message":"API gateway is now running on port 3000","service":"api-gateway","timestamp":"2025-12-25T11:42:11.558Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"api-gateway","timestamp":"2025-12-25T11:42:11.566Z"}
+{"level":"info","message":"Post service is running on port http://localhost:3002","service":"api-gateway","timestamp":"2025-12-25T11:42:11.567Z"}
+{"level":"info","message":"Media service is running on port http://localhost:3003","service":"api-gateway","timestamp":"2025-12-25T11:42:11.568Z"}
+{"level":"info","message":"Redis Url: redis://127.0.0.1:6379","service":"api-gateway","timestamp":"2025-12-25T11:42:11.572Z"}
+{"level":"info","message":"Received GET request to /v1/media/get","service":"api-gateway","timestamp":"2025-12-25T11:42:32.954Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T11:42:32.955Z"}
+{"level":"warn","message":"Invalid token.","service":"api-gateway","timestamp":"2025-12-25T11:42:32.960Z"}
+{"level":"info","message":"Received POST request to /v1/auth/login","service":"api-gateway","timestamp":"2025-12-25T11:42:40.593Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T11:42:40.594Z"}
+{"level":"info","message":"Response received from identity service: 200","service":"api-gateway","timestamp":"2025-12-25T11:42:44.065Z"}
+{"level":"info","message":"Received GET request to /v1/media/get","service":"api-gateway","timestamp":"2025-12-25T11:43:35.895Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T11:43:35.896Z"}
+{"level":"error","message":"Proxy error: socket hang up","service":"api-gateway","timestamp":"2025-12-25T11:44:38.446Z"}
+{"level":"info","message":"Received GET request to /v1/media/get","service":"api-gateway","timestamp":"2025-12-25T11:48:29.930Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T11:48:29.930Z"}
+{"level":"error","message":"Proxy error: socket hang up","service":"api-gateway","timestamp":"2025-12-25T11:49:13.815Z"}
+{"level":"info","message":"Received GET request to /v1/media/get","service":"api-gateway","timestamp":"2025-12-25T11:58:32.719Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-25T11:58:32.721Z"}
+{"level":"info","message":"Response received from media service: 408","service":"api-gateway","timestamp":"2025-12-25T12:03:58.089Z"}
+{"level":"info","message":"API gateway is now running on port 3000","service":"api-gateway","timestamp":"2025-12-26T00:00:21.356Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"api-gateway","timestamp":"2025-12-26T00:00:21.364Z"}
+{"level":"info","message":"Post service is running on port http://localhost:3002","service":"api-gateway","timestamp":"2025-12-26T00:00:21.365Z"}
+{"level":"info","message":"Media service is running on port http://localhost:3003","service":"api-gateway","timestamp":"2025-12-26T00:00:21.365Z"}
+{"level":"info","message":"Redis Url: redis://127.0.0.1:6379","service":"api-gateway","timestamp":"2025-12-26T00:00:21.366Z"}
+{"level":"info","message":"Received POST request to /v1/auth/login","service":"api-gateway","timestamp":"2025-12-26T00:03:31.638Z"}
+{"level":"info","message":"Request body, [object Object]","service":"api-gateway","timestamp":"2025-12-26T00:03:31.640Z"}
+{"level":"info","message":"Response received from identity service: 200","service":"api-gateway","timestamp":"2025-12-26T00:03:32.417Z"}
+{"level":"info","message":"Received GET request to /v1/media/get","service":"api-gateway","timestamp":"2025-12-26T00:04:01.695Z"}
+{"level":"info","message":"Request body, undefined","service":"api-gateway","timestamp":"2025-12-26T00:04:01.696Z"}
+{"level":"error","message":"Proxy error: Cannot read properties of undefined (reading 'startsWith')","service":"api-gateway","timestamp":"2025-12-26T00:04:01.704Z"}
