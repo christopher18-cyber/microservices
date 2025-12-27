@@ -1,7 +1,7 @@
 import Media from "../models/Media.js";
 import { deleteMediaFromCloudinary } from "../utils/cloudinary.js";
 
-const handlePostDeleted = async (event) => {
+export async function handlePostDeleted(event) {
     console.log(event, "eventeventevent");
     const { postId, mediaIds } = event
     try {
@@ -21,5 +21,3 @@ const handlePostDeleted = async (event) => {
         logger.error("Error occured while media deletion", err)
     }
 }
-
-export { handlePostDeleted }

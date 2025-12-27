@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const searchPostSchema = new mongoose.Schema({
+const searchPostSchema = new mongoose.Schema({
     postId: {
         type: String,
         required: true,
@@ -24,3 +24,7 @@ export const searchPostSchema = new mongoose.Schema({
 
 searchPostSchema.index({ content: "text" })
 searchPostSchema.index({ createdAt: -1 })
+
+const Search = mongoose.model("Search", searchPostSchema)
+
+export { Search }

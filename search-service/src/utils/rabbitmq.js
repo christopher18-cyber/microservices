@@ -1,13 +1,12 @@
 import "dotenv/config"
 import amqp from "amqplib"
 import logger from "./logger.js"
-import { handlePostDeleted } from "../eventHandlers/media-event-handlers.js"
 
 let connection = null
 let channel = null
 
 const EXCHANGE_NAME = "facebook_events"
-const QUEUE_NAME = "media_Service_queue"
+const QUEUE_NAME = "search_service"
 
 export async function connectRabbitMQ() {
     try {
@@ -46,14 +45,13 @@ export async function connectRabbitMQ() {
         logger.error("Error connecting to rabbit mq", err)
     }
 }
-
-export async function publishEvent(routingKey, message) {
-    if (!channel) {
-        await connectRabbitMQ()
-    }
-    channel.publish(EXCHANGE_NAME, routingKey, Buffer.from(JSON.stringify(message)))
-    logger.info(`Event published: ${routingKey}`)
-}
+// export async function publishEvent(routingKey, message) {
+//     if (!channel) {
+//         await connectRabbitMQ()
+//     }
+//     channel.publish(EXCHANGE_NAME, routingKey, Buffer.from(JSON.stringify(message)))
+//     logger.info(`Event published: ${routingKey}`)
+// }
 
 export async function consumeEvent(routingKey, callback) {
     if (!channel) {

@@ -32,6 +32,15 @@ export async function createPost(req, res) {
         })
 
         await newlyCreatedPost.save()
+
+        await publishEvent("post.created", {
+            postId: newlyCreatedPost._id.toString(),
+            userId: newlyCreatedPost.user.toString(),
+            content: newlyCreatedPost.content,
+            createdAt: newlyCreatedPost.createdAt
+        })
+
+
         await invalidatePostCaches(req, newlyCreatedPost._id.toString())
         logger.info("Post created successfully.", newlyCreatedPost)
         res.status(201).json({
@@ -134,7 +143,7 @@ export async function deletePost(req, res) {
             })
         } else {
 
-            await publishEvent("post-deleted", {
+            await publishEvent("post.deleted", {
                 postId: post._id.toString(),
                 userId: req.user.userId,
                 mediaIds: post.mediaIds
