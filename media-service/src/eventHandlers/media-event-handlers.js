@@ -1,5 +1,7 @@
 import Media from "../models/Media.js";
 import { deleteMediaFromCloudinary } from "../utils/cloudinary.js";
+import logger from "../utils/logger.js";
+
 
 export async function handlePostDeleted(event) {
     console.log(event, "eventeventevent");

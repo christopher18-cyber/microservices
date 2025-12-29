@@ -18,7 +18,7 @@ export async function connectRabbitMQ() {
 
         await channel.assertExchange(EXCHANGE_NAME, "topic", { durable: false })
         //assert queue 
-        await channel.assertQueue(QUEUE_NAME, { durable: false })
+        await channel.assertQueue(QUEUE_NAME, { durable: true })
 
         // bind queue
         await channel.bindQueue(QUEUE_NAME, EXCHANGE_NAME, "post.deleted")

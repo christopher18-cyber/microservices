@@ -19,7 +19,7 @@ export async function connectRabbitMQ() {
 
         await channel.assertExchange(EXCHANGE_NAME, "topic", { durable: false })
         //assert queue 
-        await channel.assertQueue(QUEUE_NAME, { durable: false })
+        await channel.assertQueue(QUEUE_NAME, { durable: true })
 
         // bind queue
         await channel.bindQueue(QUEUE_NAME, EXCHANGE_NAME, "post.deleted")
@@ -31,7 +31,7 @@ export async function connectRabbitMQ() {
         channel.consume(QUEUE_NAME, async (msg) => {
             if (!msg) return
             try {
-                const event = JSON.parse(mag.content.toString())
+                const event = JSON.parse(msg.content.toString())
                 console.log("Event received.", event);
                 await handlePostDeleted(event)
                 channel.ack(msg)
