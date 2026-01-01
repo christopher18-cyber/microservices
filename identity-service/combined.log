@@ -347,3 +347,35 @@
 {"level":"info","message":"Received POST request to /api/auth/login","service":"identity-service","timestamp":"2025-12-27T03:09:28.475Z"}
 {"level":"info","message":"Request body, [object Object]","service":"identity-service","timestamp":"2025-12-27T03:09:28.476Z"}
 {"level":"info","message":"Login endpoint hit.....","service":"identity-service","timestamp":"2025-12-27T03:09:28.487Z"}
+{"level":"info","message":"Identity service running on 3001","service":"identity-service","timestamp":"2025-12-29T03:03:28.741Z"}
+{"level":"info","message":"Connected to MongoDB","service":"identity-service","timestamp":"2025-12-29T03:03:32.930Z"}
+{"level":"info","message":"Received POST request to /api/auth/login","service":"identity-service","timestamp":"2025-12-29T03:26:50.995Z"}
+{"level":"info","message":"Request body, [object Object]","service":"identity-service","timestamp":"2025-12-29T03:26:51.000Z"}
+{"level":"info","message":"Login endpoint hit.....","service":"identity-service","timestamp":"2025-12-29T03:26:51.015Z"}
+{"level":"info","message":"Received POST request to /api/auth/login","service":"identity-service","timestamp":"2025-12-29T03:28:26.704Z"}
+{"level":"info","message":"Request body, [object Object]","service":"identity-service","timestamp":"2025-12-29T03:28:26.706Z"}
+{"level":"info","message":"Login endpoint hit.....","service":"identity-service","timestamp":"2025-12-29T03:28:26.711Z"}
+{"level":"info","message":"Received POST request to /api/auth/login","service":"identity-service","timestamp":"2025-12-29T03:28:39.271Z"}
+{"level":"info","message":"Request body, [object Object]","service":"identity-service","timestamp":"2025-12-29T03:28:39.272Z"}
+{"level":"info","message":"Login endpoint hit.....","service":"identity-service","timestamp":"2025-12-29T03:28:39.275Z"}
+{"level":"info","message":"Identity service running on 3001","service":"identity-service","timestamp":"2025-12-29T18:17:36.606Z"}
+{"level":"info","message":"Connected to MongoDB","service":"identity-service","timestamp":"2025-12-29T18:17:47.153Z"}
+{"level":"info","message":"Received POST request to /api/auth/login","service":"identity-service","timestamp":"2025-12-29T20:30:23.715Z"}
+{"level":"info","message":"Request body, [object Object]","service":"identity-service","timestamp":"2025-12-29T20:30:23.730Z"}
+{"level":"info","message":"Login endpoint hit.....","service":"identity-service","timestamp":"2025-12-29T20:30:23.754Z"}
+{"level":"info","message":"Identity service running on 3001","service":"identity-service","timestamp":"2025-12-30T20:23:19.629Z"}
+{"level":"info","message":"Connected to MongoDB","service":"identity-service","timestamp":"2025-12-30T20:23:23.711Z"}
+{"level":"info","message":"Received POST request to /api/auth/login","service":"identity-service","timestamp":"2025-12-30T21:07:29.227Z"}
+{"level":"info","message":"Request body, [object Object]","service":"identity-service","timestamp":"2025-12-30T21:07:29.233Z"}
+{"level":"info","message":"Login endpoint hit.....","service":"identity-service","timestamp":"2025-12-30T21:07:29.245Z"}
+{"level":"info","message":"Identity service running on 3001","service":"identity-service","timestamp":"2025-12-30T21:10:29.952Z"}
+{"level":"info","message":"Connected to MongoDB","service":"identity-service","timestamp":"2025-12-30T21:10:32.599Z"}
+{"level":"info","message":"Identity service running on 3001","service":"identity-service","timestamp":"2025-12-31T07:46:52.828Z"}
+{"code":"ECONNREFUSED","hostname":"_mongodb._tcp.cluster0.flw6c3t.mongodb.net","level":"error","message":"MongoDB connection failed querySrv ECONNREFUSED _mongodb._tcp.cluster0.flw6c3t.mongodb.net","service":"identity-service","stack":"Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.flw6c3t.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)","syscall":"querySrv","timestamp":"2025-12-31T07:46:52.846Z"}
+{"level":"info","message":"Identity service running on 3001","service":"identity-service","timestamp":"2025-12-31T09:32:17.110Z"}
+{"level":"info","message":"Connected to MongoDB","service":"identity-service","timestamp":"2025-12-31T09:32:28.544Z"}
+{"level":"info","message":"Identity service running on 3001","service":"identity-service","timestamp":"2025-12-31T20:58:20.526Z"}
+{"level":"info","message":"Connected to MongoDB","service":"identity-service","timestamp":"2025-12-31T20:58:24.188Z"}
+{"level":"info","message":"Received POST request to /api/auth/login","service":"identity-service","timestamp":"2025-12-31T20:58:59.521Z"}
+{"level":"info","message":"Request body, [object Object]","service":"identity-service","timestamp":"2025-12-31T20:58:59.603Z"}
+{"level":"info","message":"Login endpoint hit.....","service":"identity-service","timestamp":"2025-12-31T20:58:59.665Z"}

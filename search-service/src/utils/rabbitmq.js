@@ -1,12 +1,16 @@
 import "dotenv/config"
 import amqp from "amqplib"
 import logger from "./logger.js"
+// import { handlePostCreated } from "../eventHandler/search-event-handler.js"
+
 
 let connection = null
 let channel = null
 
 const EXCHANGE_NAME = "facebook_events"
 const QUEUE_NAME = "search_service"
+
+const isProduction = process.env.NODE_ENV === "production"
 
 export async function connectRabbitMQ() {
     try {
@@ -16,9 +20,9 @@ export async function connectRabbitMQ() {
         connection = await amqp.connect(process.env.RABBITMQ_URL)
         channel = await connection.createChannel()
 
-        await channel.assertExchange(EXCHANGE_NAME, "topic", { durable: false })
+        await channel.assertExchange(EXCHANGE_NAME, "topic", { durable: isProduction })
         //assert queue 
-        await channel.assertQueue(QUEUE_NAME, { durable: true })
+        await channel.assertQueue(QUEUE_NAME, { durable: isProduction })
 
         // bind queue
         await channel.bindQueue(QUEUE_NAME, EXCHANGE_NAME, "post.deleted")
@@ -27,18 +31,18 @@ export async function connectRabbitMQ() {
 
         // starts consuming messages
 
-        channel.consume(QUEUE_NAME, async (msg) => {
-            if (!msg) return
-            try {
-                const event = JSON.parse(mag.content.toString())
-                console.log("Event received.", event);
-                await handlePostDeleted(event)
-                channel.ack(msg)
-            } catch (err) {
-                logger.error("Error handling message", err)
-                channel.nack(msg)
-            }
-        })
+        // channel.consume(QUEUE_NAME, async (msg) => {
+        //     if (!msg) return
+        //     try {
+        //         const event = JSON.parse(msg.content.toString())
+        //         console.log("Event received.", event);
+        //         await handlePostDeleted(event)
+        //         channel.ack(msg)
+        //     } catch (err) {
+        //         logger.error("Error handling message", err)
+        //         channel.nack(msg, false, false)
+        //     }
+        // })
         return channel
     }
     catch (err) {

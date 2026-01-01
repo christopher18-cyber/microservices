@@ -19,3 +19,11 @@
 {"level":"error","message":"Proxy error: socket hang up","service":"api-gateway","timestamp":"2025-12-25T11:49:13.815Z"}
 {"level":"error","message":"Proxy error: Cannot read properties of undefined (reading 'startsWith')","service":"api-gateway","timestamp":"2025-12-26T00:04:01.704Z"}
 {"level":"error","message":"Proxy error: ","service":"api-gateway","timestamp":"2025-12-26T04:20:45.569Z"}
+{"level":"error","message":"Proxy error: ","service":"api-gateway","timestamp":"2025-12-29T20:37:38.428Z"}
+{"level":"error","message":"Proxy error: ","service":"api-gateway","timestamp":"2025-12-29T20:39:40.649Z"}
+{"level":"error","message":"Proxy error: ","service":"api-gateway","timestamp":"2025-12-29T20:53:18.318Z"}
+{"level":"error","message":"Proxy error: ","service":"api-gateway","timestamp":"2025-12-29T20:54:58.480Z"}
+{"level":"error","message":"Proxy error: ","service":"api-gateway","timestamp":"2025-12-29T20:55:05.613Z"}
+{"level":"error","message":"Proxy error: ","service":"api-gateway","timestamp":"2025-12-29T20:57:36.400Z"}
+{"level":"error","message":"Proxy error: ","service":"api-gateway","timestamp":"2025-12-29T20:57:40.557Z"}
+{"level":"error","message":"Proxy error: ","service":"api-gateway","timestamp":"2025-12-31T20:59:30.339Z"}

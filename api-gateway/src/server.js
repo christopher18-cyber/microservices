@@ -127,13 +127,13 @@ app.use("/v1/media", validateToken, proxy(process.env.MEDIA_SERVICE_URL, {
 app.use("/v1/search", validateToken, proxy(process.env.SEARCH_SERVICE_URL, {
     ...proxyOption,
     proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
-        proxyReqOpts.headers["Content-Type"] = "application/json";
+        proxyReqOpts.headers["content-type"] = "application/json";
         proxyReqOpts.headers["x-user-id"] = srcReq.user.userId
 
         return proxyReqOpts
     },
     userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
-        logger.info(`Response received from post service: ${proxyRes.statusCode}`)
+        logger.info(`Response received from search service: ${proxyRes.statusCode}`)
         return proxyResData
     }
 }))

@@ -9,3 +9,4 @@ identity-service/.env
 /identity-service/error.log
 combined.log
 error.log
+*.log

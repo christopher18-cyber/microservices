@@ -8,7 +8,7 @@ import logger from "./utils/logger.js"
 import { connectRabbitMQ, consumeEvent } from "./utils/rabbitmq.js"
 import { connectToDB } from "../database/db.js"
 import { searchRoutes } from "./routes/search-routes.js"
-import { handlePostCreated } from "./eventHandler/search-event-handler.js"
+import { handlePostCreated, handlePostDeleted } from "./eventHandler/search-event-handler.js"
 
 const app = express()
 const PORT = process.env.PORT || 3004
@@ -51,6 +51,9 @@ async function startServer() {
         // consume the events /subscribe to the events
 
         await consumeEvent("post.created", handlePostCreated)
+        await consumeEvent("post.deleted", handlePostDeleted)
+
+        app.listen(PORT, () => { logger.info(`Search service is running on port ${PORT}`) })
     }
     catch (err) {
         logger.error("Failed to start search service", err)

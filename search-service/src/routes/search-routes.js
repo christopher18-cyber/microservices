@@ -5,6 +5,6 @@ import { authenticateRequest } from "../middleware/authMiddleware.js"
 const router = express.Router()
 
 router.use(authenticateRequest)
-router.get("/ports", searchController)
+router.get("/posts", searchController)
 
 export { router as searchRoutes }

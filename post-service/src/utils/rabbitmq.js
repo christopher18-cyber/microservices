@@ -7,19 +7,43 @@ let channel = null
 
 const EXCHANGE_NAME = "facebook_events"
 
+const QUEUE_NAME = "post_service"
+
+const isProduction = process.env.NODE_ENV === "production"
+
 const url = process.env.RABBITMQ_URL
 
 export async function connectRabbitMQ() {
     try {
-        if (!url) {
+        if (!process.env.RABBITMQ_URL) {
             throw new Error('RABBITMQ_URL is not defined.')
         }
-        connection = await amqp.connect(url)
+        connection = await amqp.connect(process.env.RABBITMQ_URL)
         channel = await connection.createChannel()
 
-        await channel.assertExchange(EXCHANGE_NAME, "topic", { durable: false })
+        await channel.assertExchange(EXCHANGE_NAME, "topic", { durable: isProduction })
+        //assert queue 
+        await channel.assertQueue(QUEUE_NAME, { durable: isProduction })
 
-        logger.info("Connected to rabbit mq")
+        // bind queue
+        await channel.bindQueue(QUEUE_NAME, EXCHANGE_NAME, "post.deleted")
+
+        logger.info("Connected to rabbit mq and queue is ready")
+
+        // starts consuming messages
+
+        // channel.consume(QUEUE_NAME, async (msg) => {
+        //     if (!msg) return
+        //     try {
+        //         const event = JSON.parse(msg.content.toString())
+        //         console.log("Event received.", event);
+        //         await handlePostDeleted(event)
+        //         channel.ack(msg)
+        //     } catch (err) {
+        //         logger.error("Error handling message", err)
+        //         channel.nack(msg, false, false)
+        //     }
+        // })
         return channel
     }
     catch (err) {

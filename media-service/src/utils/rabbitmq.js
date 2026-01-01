@@ -9,6 +9,8 @@ let channel = null
 const EXCHANGE_NAME = "facebook_events"
 const QUEUE_NAME = "media_Service_queue"
 
+const isProduction = process.env.NODE_ENV === "production"
+
 export async function connectRabbitMQ() {
     try {
         if (!process.env.RABBITMQ_URL) {
@@ -17,9 +19,9 @@ export async function connectRabbitMQ() {
         connection = await amqp.connect(process.env.RABBITMQ_URL)
         channel = await connection.createChannel()
 
-        await channel.assertExchange(EXCHANGE_NAME, "topic", { durable: false })
+        await channel.assertExchange(EXCHANGE_NAME, "topic", { durable: isProduction })
         //assert queue 
-        await channel.assertQueue(QUEUE_NAME, { durable: true })
+        await channel.assertQueue(QUEUE_NAME, { durable: isProduction })
 
         // bind queue
         await channel.bindQueue(QUEUE_NAME, EXCHANGE_NAME, "post.deleted")
@@ -37,7 +39,7 @@ export async function connectRabbitMQ() {
                 channel.ack(msg)
             } catch (err) {
                 logger.error("Error handling message", err)
-                channel.nack(msg)
+                channel.nack(msg, false, false)
             }
         })
         return channel
